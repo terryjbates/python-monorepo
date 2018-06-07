@@ -1,5 +1,5 @@
 from contextlib import contextmanager
-
+import time
 
 class ManagedFile:
     def __init__(self, name):
@@ -28,6 +28,17 @@ class Indenter:
 
     def print(self, text):
         print('    ' * self.level + text)
+
+
+# https://gist.github.com/bradmontgomery/4f4934893388f971c6c5
+class Timer:
+    def __enter__(self):
+        self.start = time.clock()
+        return self
+
+    def __exit__(self, *args):
+        self.end = time.clock()
+        self.interval = self.end - self.start
 
 
 @contextmanager
